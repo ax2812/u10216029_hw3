@@ -24,6 +24,7 @@ public class BMI extends JFrame{
 	p1.add(Weight1);
 	p1.add(new JLabel("  "));
 	p1.add(BMI1);
+	
 	JPanel p2 = new JPanel(new GridLayout(2,1 ));
 	p2.add(new JLabel("結果"));
 	p2.add(Result1);
@@ -38,10 +39,15 @@ public class BMI extends JFrame{
 	class Act implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e){
-			
+			String a1 = Name1.getText();
+			int b1 =  Integer.parseInt(Height1.getText());
+			double c1 = Double.parseDouble(Weight1.getText());
+			double d1 = Double.parseDouble(Height1.getText());			
+			MathBMI result = new MathBMI(a1, b1, c1, d1);			
+			double bmi = result.getBMI();			
+			Result1.setText(String.format("你的  BMI : %.2f 還有你  " + result.getStatus(bmi) ,bmi ));
 		}
 	}
-
 	public static void main(String[] args){
 		JFrame frame = new BMI();
 		frame.setTitle("BMI");
@@ -51,3 +57,38 @@ public class BMI extends JFrame{
 		frame.setVisible(true);
 	}
 }
+
+
+class MathBMI{
+	  private String name;
+	  private int age;
+	  private double weight;
+	  private double height;
+	  public static final double KILOGRAMS_PER_POUND = 0.45359237;
+	  public static final double METERS_PER_INCH = 0.0254;
+	  
+	  public MathBMI(String name , int age , double weight, double height){
+		this.name = name;
+		this.age  = age;
+		this.weight = weight;
+		this.height = height;
+	  } 
+	  public MathBMI(String name , double weight , double height){
+		this(name , 20 , weight , height);  
+	  }
+	  public double getBMI(){
+		double bmi = weight * KILOGRAMS_PER_POUND / ((height * METERS_PER_INCH) * (height * METERS_PER_INCH));
+		return Math.round(bmi * 100)/100.0;
+	  }
+	  public String getStatus(double bmi){
+		
+		if(bmi < 18.5)
+			return "你....營養不良嗎?";
+		else if (bmi<25)
+			return "你太剛剛好了";
+		else if (bmi < 30)
+			return "超重超重 快去跑跑吧你!!!";
+		else
+			return "啥?";
+	  }  
+	}
