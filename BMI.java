@@ -4,7 +4,7 @@ import java.awt.event.*;
 
 
 public class BMI extends JFrame{
-	
+	//new出該有的東西
 	JTextField Name1 = new JTextField(12);
 	JTextField Age1 = new JTextField(5);
 	JTextField Height1 = new JTextField(12);
@@ -13,8 +13,8 @@ public class BMI extends JFrame{
 	JTextField Result1 = new JTextField(50);
 	
 	public BMI(){	
-	JPanel p1 = new JPanel(new GridLayout(5, 6));		
-	p1.add(new JLabel("姓名"));
+	JPanel p1 = new JPanel(new GridLayout(5, 6));	//設定版面格是	
+	p1.add(new JLabel("姓名")); //將JLabel JTextField 丟進去
 	p1.add(Name1);
 	p1.add(new JLabel("年齡"));
 	p1.add(Age1);
@@ -25,33 +25,33 @@ public class BMI extends JFrame{
 	p1.add(new JLabel("  "));
 	p1.add(BMI1);
 	
-	JPanel p2 = new JPanel(new GridLayout(2,1 ));
-	p2.add(new JLabel("結果"));
+	JPanel p2 = new JPanel(new GridLayout(2,1 )); // 2個地區
+	p2.add(new JLabel("結果"));//用出輸出攔
 	p2.add(Result1);
 	
-	add(p1, BorderLayout.CENTER);
+	add(p1, BorderLayout.CENTER); // 放置
 	add(p2, BorderLayout.NORTH);
 		
-	BMI1.addActionListener(new Act());
+	BMI1.addActionListener(new Act()); //按鈕動作
 	}
 		
 	
-	class Act implements ActionListener{
+	class Act implements ActionListener{ //按鈕動作
 		@Override
 		public void actionPerformed(ActionEvent e){
-			String a1 = Name1.getText();
+			String a1 = Name1.getText();   // 獲得輸入值
 			int b1 =  Integer.parseInt(Height1.getText());
 			double c1 = Double.parseDouble(Weight1.getText());
 			double d1 = Double.parseDouble(Height1.getText());			
-			MathBMI result = new MathBMI(a1, b1, c1, d1);			
-			double bmi = result.getBMI();			
-			Result1.setText(String.format("你的  BMI : %.2f 還有你  " + result.getStatus(bmi) ,bmi ));
+			MathBMI result = new MathBMI(a1, b1, c1, d1);			 //丟到  MathBMI
+			double bmi = result.getBMI();			//將getBMI()的數值拿出來
+			Result1.setText(String.format("你的  BMI : %.2f 還有你  " + result.getStatus(bmi) ,bmi )); //險是結果
 		}
 	}
 	public static void main(String[] args){
-		JFrame frame = new BMI();
-		frame.setTitle("BMI");
-		frame.setSize(500, 450);
+		JFrame frame = new BMI(); // new出來
+		frame.setTitle("BMI"); //標題
+		frame.setSize(500, 450);//大小
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
@@ -59,7 +59,7 @@ public class BMI extends JFrame{
 }
 
 
-class MathBMI{
+class MathBMI{ //將課本的class 拉出來
 	  private String name;
 	  private int age;
 	  private double weight;
@@ -82,7 +82,7 @@ class MathBMI{
 	  }
 	  public String getStatus(double bmi){
 		
-		if(bmi < 18.5)
+		if(bmi < 18.5) // 改中文
 			return "你....營養不良嗎?";
 		else if (bmi<25)
 			return "你太剛剛好了";
